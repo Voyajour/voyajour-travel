@@ -1,0 +1,11 @@
+@import "~bootstrap/scss/bootstrap";
+@import "./variables.scss";
+
+.body-container {
+    color: $base-color;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: lighten($color: $blue-color, $amount: 55);
+}

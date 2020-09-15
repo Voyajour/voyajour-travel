@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/bootstrap";
+@import "./variables.scss";
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+#sign-out {
+    float: right;
+}
+
+Navbar.Brand {
+    color: $blue-color;
+}

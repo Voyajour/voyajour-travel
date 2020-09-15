@@ -1,0 +1,22 @@
+@import "./variables.scss";
+
+#large-activity-container {
+    flex-grow: 3;
+    padding: 3%;
+    text-align: center;
+    color: $base-color;
+}
+
+// #all-activities {
+
+// }
+
+#Activity {
+    text-align: start;
+    margin: 3%;
+    border: solid 1px black;
+    border-radius: 0.2rem;
+    padding: 2%;
+    box-shadow: 0.2rem 0.2rem 0.2rem lighten($color: $base-color, $amount: 55);
+    background-color: lighten($color: $base-color, $amount: 85);
+}
