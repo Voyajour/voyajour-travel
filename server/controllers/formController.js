@@ -24,6 +24,7 @@ formController.findUser = (req, res, next) => {
   });
 };
 
+
 // decrypts password from SQL database and compares it with inputted password from login
 formController.checkPassword = (req, res, next) => {
   const { password, user } = res.locals;
