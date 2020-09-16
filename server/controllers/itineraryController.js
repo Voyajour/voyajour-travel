@@ -5,7 +5,7 @@ const itineraryController = {};
 itineraryController.newPlan = (req, res, next) => {
   console.log(req.body);
   return next();
-  // we're being sent an array of objects, with keys location and contry
+  // we're being sent an array of objects, with keys location and country
   // destructure the country and location from req
   // declare an array that will hold our location and country variables
   // declare a variable that will hold the SQL query, to PUT or INSERT

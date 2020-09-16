@@ -92,7 +92,7 @@ const Login = (props) => {
       <br />
       <p className='text-center'>
         New user?&nbsp;
-        {/* <Link to='/signup'>Sign up here!</Link> */}
+        <Link to='/signup'>Sign up here!</Link>
       </p>
     </Container>
   );
