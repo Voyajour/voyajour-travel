@@ -10,13 +10,14 @@ import * as actions from '../actions/actions.js';
 const mapDispatchToProps = (dispatch) => ({
   getActivities: (tripId) => dispatch(actions.getActivities(tripId)),
   newLocationInput: (e) => dispatch(actions.newLocationInput(e)),
-  addNewPlans: (e) => dispatch(actions.newPlans(e)),
+  storeNewLocation: (e) => dispatch(actions.storeNewLocation(e)),
 });
 
 const mapStateToProps = (state) => ({
   country: state.form.newPlans.country,
   newLocation: state.form.newPlans.newLocation,
   trips: state.trips.trips,
+  activeLocationId: state.trips.activeLocationId,
 });
 
 const SidebarContainer = (props) => {
@@ -27,6 +28,8 @@ const SidebarContainer = (props) => {
     country,
     newLocation,
     trips,
+    activeLocationId,
+    storeNewLocation,
   } = props;
 
   return (
@@ -37,15 +40,17 @@ const SidebarContainer = (props) => {
         country={country}
         location={newLocation}
         newLocationInput={newLocationInput}
+        storeNewLocation={storeNewLocation}
       />
       {/* this function iterates over an array in state and renders Sidebar Card components */}
       {trips.map((trip, i) => (
         <SidebarCard
-          key={`tripId${i}`}
-          tripId={`tripId${i}`}
+          key={`locationId${i}`}
+          locationid={trip.locationId}
           getActivities={getActivities}
           country={trip.country}
           location={trip.location}
+          activeLocationId={activeLocationId}
         />
       ))}
     </div>
