@@ -12,17 +12,17 @@ router.post(
     const { firstName, email, username, password } = res.locals.newUser;
     const values = [firstName, email, username, password];
     const QUERY = `INSERT INTO users (name, email, username, password)
-                  VALUES($1, $2, $3, $4);`;
+                  VALUES($1, $2, $3, $4) RETURNING *;`;
     db.query(QUERY, values)
       .then((dbRes) => {
         console.log(dbRes);
+        res.status(200).send(dbRes.rows[0]);
       })
       .catch((err) => {
-        console.log(err.stack);
+        console.log('query error', err.stack);
+        res.sendStatus(418);
       });
-
-    res.status(200).send('signup router');
-  }
+  },
 );
 
 module.exports = router;
