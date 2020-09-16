@@ -40,49 +40,49 @@ const Login = (props) => {
   } = props;
 
   // check if username and password are correct, if so redirect to /main
-  if (validated === true) return <Redirect to="/main" />;
+  if (validated === true) return <Redirect to='/main' />;
   // check if user has clicked login button, if so redirect to /signup
-  if (loginAttempts > 0) return <Redirect to="/signup" />;
+  if (loginAttempts > 0) return <Redirect to='/signup' />;
 
   return (
     <Container>
-      <h1>Travelist</h1>
+      <h1>Voyajour</h1>
 
       <Form noValidate>
-        <Form.Group controlId="username">
+        <Form.Group controlId='username'>
           <Form.Label>Username</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Username"
+            type='text'
+            placeholder='Username'
             required
             onChange={loginInput}
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type='invalid'>
             Incorrect Username
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group controlId="password">
+        <Form.Group controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control
-            type="password"
-            placeholder="Password"
+            type='password'
+            placeholder='Password'
             required
             onChange={loginInput}
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type='invalid'>
             Incorrect Password
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group controlId="loginCheckbox">
-          <Form.Check type="checkbox" label="Remember me" />
+        <Form.Group controlId='loginCheckbox'>
+          <Form.Check type='checkbox' label='Remember me' />
         </Form.Group>
 
         <Button
-          className="mr-3"
-          variant="danger"
-          type="button"
+          className='mr-3'
+          variant='danger'
+          type='button'
           onClick={() => validateLogin(username, password)}
         >
           Login
@@ -90,9 +90,9 @@ const Login = (props) => {
       </Form>
 
       <br />
-      <p className="text-center">
+      <p className='text-center'>
         New user?&nbsp;
-        <Link to="/signup">Sign up here!</Link>
+        {/* <Link to='/signup'>Sign up here!</Link> */}
       </p>
     </Container>
   );
