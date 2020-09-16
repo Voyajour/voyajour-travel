@@ -30,8 +30,8 @@ const SidebarContainer = (props) => {
   } = props;
 
   return (
-    <div className="side-bar">
-      <h5 id="itineraries">Itineraries</h5>
+    <div className='side-bar'>
+      <h5 id='itineraries'>Itineraries</h5>
       <NewPlans
         addNewPlans={addNewPlans}
         country={country}
@@ -45,7 +45,7 @@ const SidebarContainer = (props) => {
           tripId={`tripId${i}`}
           getActivities={getActivities}
           country={trip.country}
-          location={trip.newLocation}
+          location={trip.location}
         />
       ))}
     </div>

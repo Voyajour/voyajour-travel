@@ -61,11 +61,14 @@ const addActivity = (newActivity) => ({
 // return function(dispatch) { ... }
 // }
 const validateLogin = (username, password) => (dispatch) => {
-  axios.post('/api/user-validation', { username, password })
-    .then((response) => dispatch({
-      type: types.VALID_LOGIN,
-      payload: response.data,
-    }))
+  axios
+    .post('/api/user-validation', { username, password })
+    .then((response) =>
+      dispatch({
+        type: types.VALID_LOGIN,
+        payload: response.data,
+      })
+    )
     .catch((err) => console.log('Error in SUBMIT_LOGIN Reducer', err));
 };
 

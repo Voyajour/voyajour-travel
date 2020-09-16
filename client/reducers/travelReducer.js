@@ -17,7 +17,7 @@ const travelReducer = (state = initialState, action) => {
       const count = state.count + 1;
       return { ...state, count };
     }
-    // this action was left incomplete, the idea was to get activities corresponding with 
+    // this action was left incomplete, the idea was to get activities corresponding with
     // itineraries
     // from the database
     case types.GET_ACTIVITIES: {
