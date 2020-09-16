@@ -7,7 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import * as actions from '../actions/actions.js';
+import * as actions from '../actions/actions';
 
 // loginInput updates state with whatever is typed in the username or password inputs
 // validateLogin checks if a user is in the database and compares the inputted password

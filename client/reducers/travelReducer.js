@@ -10,58 +10,64 @@ const initialState = {
   // trips contains objects with keys: id(unique to location), location(str), country(str)
   trips: [
     {
-      id: 1,
-      location: 'bosnia',
-      country: 'herzegovina',
+      locationId: 1,
+      location: 'LA',
+      country: 'USA',
     },
     {
-      id: 1,
-      location: 'bosnia',
-      country: 'herzegovina',
+      locationId: 2,
+      location: 'NYC',
+      country: 'USA',
     },
     {
-      id: 1,
-      location: 'bosnia',
-      country: 'herzegovina',
+      locationId: 3,
+      location: 'Munich',
+      country: 'GERMANY',
     },
     {
-      id: 1,
-      location: 'bosnia',
-      country: 'herzegovina',
+      locaitonId: 4,
+      location: 'Paris',
+      country: 'FRANCE',
     },
   ],
   // activities contains objects with keys: description, notes, address, link, (strs); completed(bool); locationID (num correlating to location; id (num, unique to activity))
-  activities: [
+  activities: [],
+  //holds all activities
+  activityStore: [
     {
       locationId: 1,
-      description: 'state.form.newActivity.description',
-      notes: 'state.form.newActivity.notes',
-      address: 'state.form.newActivity.address',
-      link: 'state.form.newActivity.link',
+      description: 'Go to Guisados',
+      notes: 'get the al pastor',
+      address: '123 Sepulveda',
+      link: 'www.guisados.com',
       completed: false,
     },
     {
-      description: 'state.form.newActivity.description',
-      notes: 'state.form.newActivity.notes',
-      address: 'state.form.newActivity.address',
-      link: 'state.form.newActivity.link',
+      locationId: 1,
+      description: 'Guggenheim',
+      notes: 'Dont forget a coat',
+      address: '456 Tram on a Hill way',
+      link: 'guggenheim.public',
       completed: false,
     },
     {
-      description: 'state.form.newActivity.description',
-      notes: 'state.form.newActivity.notes',
-      address: 'state.form.newActivity.address',
-      link: 'state.form.newActivity.link',
+      locationId: 2,
+      description: 'Oktoberfest',
+      notes: 'Hofbräu House',
+      address: '2398 Straße Weiß',
+      link: 'hofbrau.de',
       completed: false,
     },
     {
-      description: 'state.form.newActivity.description',
-      notes: 'state.form.newActivity.notes',
-      address: 'state.form.newActivity.address',
-      link: 'state.form.newActivity.link',
+      locationId: 3,
+      description: 'Eiffel Tower',
+      notes: 'Do things there',
+      address: '2983 Rue Tor Eifel',
+      link: 'www.eiffel.fr',
       completed: false,
     },
   ],
+  activeLocationId: 1,
 };
 
 const travelReducer = (state = initialState, action) => {
@@ -75,39 +81,40 @@ const travelReducer = (state = initialState, action) => {
     // from the database
     case types.GET_ACTIVITIES: {
       const { payload } = action;
-      // const { trips } = initialState;
-      // axios.get('/:userId/Activities')
-      //   .then(res => {
-      //     trips = res.rows
-      //   })
-      //   .catch('error inside of getActivities', err);
-      console.log(payload);
-      return { ...state };
+      // create new var to hold new active location id
+      let newActiveLocationId = payload;
+      // filter through relevant activities and update state.trips.activities to only items that match activeLocationId
+      let relevantActivities = state.activityStore.filter(
+        (activity) => newActiveLocationId === activity.locationId
+      );
+      // return copy of state object with state spread out, set activities to filtered activities and activeLocationId to new activeLocationId
+      return {
+        ...state,
+        activities: relevantActivities,
+        activeLocationId: newActiveLocationId,
+      };
     }
-    // this action sends a request to our server. However, the router is unfinished,
-    // so this function is not hooked up to the database yet
-    case types.NEW_PLANS: {
+    // this action sends a request to our server.
+    case types.ADD_NEW_LOCATION: {
+      console.log('inside travel reducer, state.trips:', state.trips);
       const newTrips = state.trips.slice();
       newTrips.push(action.payload);
-      console.log('inside travel reducer, state.trips:', state.trips);
-      axios
-        .post('/itinerary', { location: 'Los Angeles' })
-        .then((res) => console.log(res))
-        .catch((err) =>
-          console.log('error inside of NEW_PLANS travel reducer', err)
-        );
       return {
         ...state,
         trips: newTrips,
+        activeLocationId: newTrips[newTrips.length - 1].locationId,
       };
     }
 
     case types.ADD_ACTIVITIES: {
       const newActivities = state.activities.slice();
+      const newActivityStore = state.newActivityStore.slice();
       newActivities.push(action.payload);
+      newActivityStore.push(action.payload);
       return {
         ...state,
         activities: newActivities,
+        activityStory: newActivityStore,
       };
     }
     default:
