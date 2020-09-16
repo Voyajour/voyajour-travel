@@ -39,7 +39,7 @@ const ActivitiesContainer = (props) => {
   } = props;
 
   return (
-    <div id="large-activity-container">
+    <div id='large-activity-container'>
       <ActivityFormModal
         show={showModal}
         onHide={() => setShowModal(false)}
@@ -52,7 +52,7 @@ const ActivitiesContainer = (props) => {
         addActivity={addToActivitiesArray}
       />
       <h1>Activities: </h1>
-      <div id="all-activities">
+      <div id='all-activities'>
         <Button onClick={() => setShowModal(true)}>Add Activity</Button>
         {activities.map((el, i) => (
           <Activity

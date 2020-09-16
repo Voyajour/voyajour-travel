@@ -7,8 +7,61 @@ import * as types from '../constants/actionTypes';
 // note, because of the way we set up index.js, this state is accesssed w/ state.trips;
 const initialState = {
   count: 0,
-  trips: [],
-  activities: [],
+  // trips contains objects with keys: id(unique to location), location(str), country(str)
+  trips: [
+    {
+      id: 1,
+      location: 'bosnia',
+      country: 'herzegovina',
+    },
+    {
+      id: 1,
+      location: 'bosnia',
+      country: 'herzegovina',
+    },
+    {
+      id: 1,
+      location: 'bosnia',
+      country: 'herzegovina',
+    },
+    {
+      id: 1,
+      location: 'bosnia',
+      country: 'herzegovina',
+    },
+  ],
+  // activities contains objects with keys: description, notes, address, link, (strs); completed(bool); locationID (num correlating to location; id (num, unique to activity))
+  activities: [
+    {
+      locationId: 1,
+      description: 'state.form.newActivity.description',
+      notes: 'state.form.newActivity.notes',
+      address: 'state.form.newActivity.address',
+      link: 'state.form.newActivity.link',
+      completed: false,
+    },
+    {
+      description: 'state.form.newActivity.description',
+      notes: 'state.form.newActivity.notes',
+      address: 'state.form.newActivity.address',
+      link: 'state.form.newActivity.link',
+      completed: false,
+    },
+    {
+      description: 'state.form.newActivity.description',
+      notes: 'state.form.newActivity.notes',
+      address: 'state.form.newActivity.address',
+      link: 'state.form.newActivity.link',
+      completed: false,
+    },
+    {
+      description: 'state.form.newActivity.description',
+      notes: 'state.form.newActivity.notes',
+      address: 'state.form.newActivity.address',
+      link: 'state.form.newActivity.link',
+      completed: false,
+    },
+  ],
 };
 
 const travelReducer = (state = initialState, action) => {
