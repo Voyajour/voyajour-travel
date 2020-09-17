@@ -20,6 +20,8 @@ formController.findUser = (req, res, next) => {
     // store user data from SQL database in the form of an array of objects
     // this includes their hashed password
     res.locals.user = result.rows;
+    res.locals.user_id = result.rows[0]._id;
+    res.locals.username = result.rows[0].username;
     return next();
   });
 };
@@ -43,5 +45,49 @@ formController.checkPassword = (req, res, next) => {
     })
     .catch((err) => next(err));
 };
+
+formController.getData = (req, res, next) => {
+  //res.locals.username contains username
+  //res.locals.user_id contains user id
+
+  const queryActivities =  `SELECT * FROM activities WHERE user_id=${res.locals.user_id}`;
+  const queryLocations = `SELECT * FROM locations WHERE user_id=${res.locals.user_id}`;
+
+  console.log('Inside of getData:', res.locals.user_id);
+  console.log(typeof res.locals.user_id);
+
+  db.query(queryActivities)
+    .then((activityData) => {
+      res.locals.activities = activityData.rows;
+      console.log('First query activities: ', res.locals.activities);
+      
+    })
+    .then(() => {
+      db.query(queryLocations)
+        .then((locationData) => {
+          console.log('inside 2nd query ', locationData);
+          res.locals.locations = locationData.rows;
+
+          //res.locals.response 
+          res.locals.getResponse = {
+            username: res.locals.username,
+            user_id: res.locals.user_id,
+            validated: true,
+            locations: res.locals.locations,
+            activities: res.locals.activities,
+          }
+
+          return next();
+        })
+        .catch((err) => {
+          return next(err);
+        })
+    })
+    .catch((err) => {
+      return next(err);
+    })
+  
+
+}
 
 module.exports = formController;

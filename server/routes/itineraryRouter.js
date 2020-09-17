@@ -4,6 +4,14 @@ const router = express.Router();
 
 const itineraryController = require('../controllers/itineraryController.js')
 
+//itineray/location -> Giant ovbject 
+//request with user id
+//query database for select all from locations where userid = req.params
+//select * from activites wehre userid = req.body.id...params
+//Send all as one object with everything from first query in lcoations property in activities proeprty.
+//res.locals locations, activities
+//middleware -> combine both
+
 router.post('/',
   itineraryController.newPlan,
   (req, res) => {
