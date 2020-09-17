@@ -38,10 +38,18 @@ router.put('/updateActivity',itineraryController.updateActivity, (req, res) => {
   }
 })
 
+router.delete('/deleteActivity/:user_id', (req, res) => {
+  //delete middleware
+});
+
 //router update location
 router.put('/updateLocation', itineraryController.updateActivity,(req, res) => {
   res.sendStatus(200);
 
 })
+
+router.delete('/deleteLocation/:user_id/:locationName', itineraryController.deleteLocation, (req, res) => {
+  //delete middleware functionality
+});
 
 module.exports = router;

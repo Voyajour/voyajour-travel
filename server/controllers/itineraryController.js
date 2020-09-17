@@ -50,4 +50,15 @@ itineraryController.updateActivity = (req, res, next) => {
 };
 
 
+itineraryController.deleteLocation = (req, res, next) => {
+  //db query to delete entire location based on user_id
+  const {user_id, locationName} = req.params;
+
+  const values = [user_id, locationName];
+
+  const QUERY = 'DELETE FROM locations WHERE user_id='
+
+
+}
+
 module.exports = itineraryController;
