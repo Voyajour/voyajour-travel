@@ -14,15 +14,15 @@ const submitSignupForm = (formInput) => ({
 });
 
 // adds activity cards to the activity component container
-const getActivities = (tripId) => ({
+const getActivities = (locationId) => ({
   type: types.GET_ACTIVITIES,
-  payload: tripId,
+  payload: locationId,
 });
 
 // adds itinerary cards to the sideBar container
-const newPlans = (plans) => ({
-  type: types.NEW_PLANS,
-  payload: plans,
+const addNewLocation = (location) => ({
+  type: types.ADD_NEW_LOCATION,
+  payload: location,
 });
 
 const newLocationInput = (location) => ({
@@ -72,6 +72,26 @@ const validateLogin = (username, password) => (dispatch) => {
     .catch((err) => console.log('Error in SUBMIT_LOGIN Reducer', err));
 };
 
+const storeNewLocation = (newLocationObj) => (dispatch) => {
+  axios
+    .post('/newLocation', newLocationObj)
+    .then((res) => dispatch(addNewLocation(res.data)))
+    .catch((err) =>
+      console.log('error inside of NEW_PLANS travel reducer', err)
+    );
+};
+
+const storeNewActivity = (newActivityObj) => (dispatch) => {
+  axios
+    .post('/newActivity', newActivityObj)
+    .then((res) => {
+      dispatch(addActivity(res.data));
+    })
+    .catch((err) => {
+      console.log('error inside of ADD_ACTIVITIES reducer', err);
+    });
+};
+
 export {
   addCount,
   submitSignupForm,
@@ -79,9 +99,11 @@ export {
   validateLogin,
   signupFormInput,
   getActivities,
-  newPlans,
+  addNewLocation,
   newLocationInput,
   activityFormInput,
   activityFormSubmit,
   addActivity,
+  storeNewLocation,
+  storeNewActivity,
 };

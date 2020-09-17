@@ -10,7 +10,8 @@ const mapDispatchToProps = (dispatch) => ({
   handleFormInput: (newState) => dispatch(actions.activityFormInput(newState)),
   handleFormSubmit: (newState) =>
     dispatch(actions.activityFormSubmit(newState)),
-  addToActivitiesArray: (activity) => dispatch(actions.addActivity(activity)),
+  addToActivitiesArray: (activity) =>
+    dispatch(actions.storeNewActivity(activity)),
 });
 
 const mapStateToProps = (state) => ({
