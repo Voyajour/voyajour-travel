@@ -53,10 +53,10 @@ const SidebarContainer = (props) => {
       {trips.map((trip, i) => (
         <SidebarCard
           key={`locationId${i}`}
-          locationid={trip.locationId}
+          locationid={trip._id}
           getActivities={getActivities}
           country={trip.country}
-          location={trip.location}
+          location={trip.name}
           activeLocationId={activeLocationId}
           deleteLocationCard={deleteLocationCard}
           userId={userId}
