@@ -76,15 +76,26 @@ const travelReducer = (state = initialState, action) => {
       const count = state.count + 1;
       return { ...state, count };
     }
-    // this action was left incomplete, the idea was to get activities corresponding with
-    // itineraries
-    // from the database
+
+    // populate activites that are returned on user login
+    case types.POPULATE_ACTIVITIES: {
+      const newActivities = action.payload.activities;
+      // location will be an object with _id, name, country, user_id
+      const newLocations = action.payload.locations;
+      return {
+        ...state,
+        activities: newActivities,
+        activityStore: newActivities,
+        locations: newLocations,
+      };
+    }
+
     case types.GET_ACTIVITIES: {
       const { payload } = action;
       // create new var to hold new active location id
-      let newActiveLocationId = payload;
+      const newActiveLocationId = payload;
       // filter through relevant activities and update state.trips.activities to only items that match activeLocationId
-      let relevantActivities = state.activityStore.filter(
+      const relevantActivities = state.activityStore.filter(
         (activity) => newActiveLocationId === activity.locationId
       );
       // return copy of state object with state spread out, set activities to filtered activities and activeLocationId to new activeLocationId
@@ -114,7 +125,7 @@ const travelReducer = (state = initialState, action) => {
       return {
         ...state,
         activities: newActivities,
-        activityStory: newActivityStore,
+        activityStore: newActivityStore,
       };
     }
     default:
