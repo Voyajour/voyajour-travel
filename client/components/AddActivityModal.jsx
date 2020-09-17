@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-// here, we are destructering the props object in the paramete itself
+// here, we are destructering the props object in the parameter itself
 // this would be the same thing as doing const { show, ... etc} = props
 const AddActivityModal = ({
   show,
@@ -26,24 +26,7 @@ const AddActivityModal = ({
         <Modal.Title>Add Activity</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleFormSubmit({ description, notes, address, link });
-            addActivity(
-              {
-                description,
-                notes,
-                address,
-                link,
-                completed: false,
-                locationId: activeLocationId,
-                userId,
-              },
-              userId
-            );
-          }}
-        >
+        <Form onSubmit={(e) => {}}>
           <Form.Group controlId='activityDescription'>
             <Form.Label>Activity Description</Form.Label>
             <Form.Control
@@ -81,7 +64,22 @@ const AddActivityModal = ({
             variant='danger'
             type='submit'
             className='mt-4'
-            onClick={() => onHide()}
+            onClick={() => {
+              onHide();
+              handleFormSubmit({ description, notes, address, link });
+              addActivity(
+                {
+                  userId,
+                  description,
+                  notes,
+                  address,
+                  link,
+                  completed: false,
+                  locationId: activeLocationId,
+                },
+                userId
+              );
+            }}
           >
             Add Activity
           </Button>
