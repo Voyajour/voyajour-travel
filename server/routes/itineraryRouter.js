@@ -5,14 +5,18 @@ const router = express.Router();
 const itineraryController = require('../controllers/itineraryController.js');
 
 // creating a new location in the locations table.
-router.post('/newLocation', itineraryController.newLocation, (req, res) => {
-  if (res.locals.success) {
-    console.log('posted into db @ itineraryController');
-    res.status(200).json(res.locals.newLocation);
-  } else {
-    res.status(200).send('My apologies, could not update database');
-  }
-});
+router.post(
+  '/newLocation?user_id=',
+  itineraryController.newLocation,
+  (req, res) => {
+    if (res.locals.success) {
+      console.log('posted into db @ itineraryController');
+      res.status(200).json(res.locals.newLocation);
+    } else {
+      res.status(200).send('My apologies, could not update database');
+    }
+  },
+);
 
 // router.post with that of /newActivity
 // router.post('/newActivity', itineraryController., (req, res) => {
