@@ -72,18 +72,18 @@ const validateLogin = (username, password) => (dispatch) => {
     .catch((err) => console.log('Error in SUBMIT_LOGIN Reducer', err));
 };
 
-const storeNewLocation = (newLocationObj) => (dispatch) => {
+const storeNewLocation = (newLocationObj, userId) => (dispatch) => {
   axios
-    .post('/newLocation', newLocationObj)
+    .post(`/itinerary/newLocation/${userId}`, newLocationObj)
     .then((res) => dispatch(addNewLocation(res.data)))
     .catch((err) =>
       console.log('error inside of NEW_PLANS travel reducer', err)
     );
 };
 
-const storeNewActivity = (newActivityObj) => (dispatch) => {
+const storeNewActivity = (newActivityObj, userId) => (dispatch) => {
   axios
-    .post('/newActivity', newActivityObj)
+    .post(`/newActivity/${userId}`, newActivityObj)
     .then((res) => {
       dispatch(addActivity(res.data));
     })

@@ -10,8 +10,8 @@ const mapDispatchToProps = (dispatch) => ({
   handleFormInput: (newState) => dispatch(actions.activityFormInput(newState)),
   handleFormSubmit: (newState) =>
     dispatch(actions.activityFormSubmit(newState)),
-  addToActivitiesArray: (activity) =>
-    dispatch(actions.storeNewActivity(activity)),
+  addToActivitiesArray: (activity, userId) =>
+    dispatch(actions.storeNewActivity(activity, userId)),
 });
 
 const mapStateToProps = (state) => ({
@@ -20,6 +20,7 @@ const mapStateToProps = (state) => ({
   address: state.form.newActivity.address,
   link: state.form.newActivity.link,
   completed: state.form.newActivity.completed,
+  userId: state.form.activeUser.userId,
   activities: state.trips.activities,
 });
 
@@ -33,6 +34,8 @@ const ActivitiesContainer = (props) => {
     notes,
     address,
     link,
+    completed,
+    userId,
     handleFormInput,
     handleFormSubmit,
     addToActivitiesArray,
@@ -48,6 +51,7 @@ const ActivitiesContainer = (props) => {
         notes={notes}
         address={address}
         link={link}
+        userId={userId}
         handleFormInput={handleFormInput}
         handleFormSubmit={handleFormSubmit}
         addActivity={addToActivitiesArray}
