@@ -1,40 +1,46 @@
-@import "~bootstrap/scss/bootstrap";
-@import "./variables.scss";
-
-
+@import '~bootstrap/scss/bootstrap';
+@import './variables.scss';
 
 .side-bar {
-    color: $base-color;
-    background-color: lighten($color: $base-color, $amount: 75);
-    height: 100vh;
-    width: 20%;
-    min-width: 130px;
-    max-width: 250px;
-    text-align: start;
-    // flex-grow: 1;
+  color: $base-color;
+  background-color: lighten($color: $base-color, $amount: 75);
+  height: 100vh;
+  width: 20%;
+  min-width: 130px;
+  max-width: 250px;
+  text-align: start;
+  // flex-grow: 1;
 }
 
 #itineraries {
-    text-align: center;
+  text-align: center;
 }
 
 .itinerary-form {
-    margin: 3%;
-    border: solid 1px black;
-    border-radius: 0.2rem;
-    padding: 3%;
-    box-shadow: 0.2rem 0.2rem 0.2rem lighten($color: $base-color, $amount: 25);
-    background-color: lighten($color: $base-color, $amount: 85);
+  margin: 3%;
+  border: solid 1px black;
+  border-radius: 0.2rem;
+  padding: 3%;
+  box-shadow: 0.2rem 0.2rem 0.2rem lighten($color: $base-color, $amount: 25);
+  background-color: lighten($color: $base-color, $amount: 85);
 }
 
-
 .side-bar-card {
-    margin: 3%;
-    padding: 5%;
-    width: 94%;
-    border: solid 1px black;
-    border-radius: 0.2rem;
-    text-align: start;
-    box-shadow: 0.2rem 0.2rem 0.2rem lighten($color: $base-color, $amount: 25);
-    background-color: lighten($color: $base-color, $amount: 65);
+  margin: 3%;
+  padding: 5%;
+  width: 94%;
+  border: solid 1px black;
+  border-radius: 0.2rem;
+  text-align: start;
+  box-shadow: 0.2rem 0.2rem 0.2rem lighten($color: $base-color, $amount: 25);
+  background-color: lighten($color: $base-color, $amount: 65);
+  position: relative;
+}
+
+.delete-icon-location {
+  font-size: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  height: auto;
 }
