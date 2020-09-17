@@ -6,7 +6,7 @@ const itineraryController = require('../controllers/itineraryController.js');
 
 // creating a new location in the locations table.
 router.post(
-  '/newLocation?user_id=',
+  '/newLocation/:user_id',
   itineraryController.newLocation,
   (req, res) => {
     if (res.locals.success) {
@@ -25,28 +25,47 @@ router.post(
 //   res.status(200).json(res.locals);
 // });
 
-
+router.post(
+  '/newActivity/:user_id',
+  itineraryController.newActivity,
+  (req, res) => {
+    if (res.locals.success) {
+      res.status(200).json(res.locals.newActivity);
+    } else {
+      res.status(200).send('Sorry, activity could not be added');
+    }
+  },
+);
 //router update update activity
 //activities table columns: _id, location_id, user_id, link, notes, address, completed, description
 //id is in params
-router.put('/updateActivity',itineraryController.updateActivity, (req, res) => {
-  //if res.locals.sucess is true then send the updatedActivity object back tot he client
-  if(res.locals.sucess){
-    res.status(200).json(res.locals.updatedActivity);
-  } else {
-    res.status(200).send('Sorry. Activity could not be updated at this time.');
-  }
-})
+router.put(
+  '/updateActivity',
+  itineraryController.updateActivity,
+  (req, res) => {
+    //if res.locals.success is true then send the updatedActivity object back tot he client
+    if (res.locals.success) {
+      res.status(200).json(res.locals.updatedActivity);
+    } else {
+      res
+        .status(200)
+        .send('Sorry. Activity could not be updated at this time.');
+    }
+  },
+);
 
 router.delete('/deleteActivity/:user_id', (req, res) => {
   //delete middleware
 });
 
 //router update location
-router.put('/updateLocation', itineraryController.updateActivity,(req, res) => {
-  res.sendStatus(200);
-
-})
+router.put(
+  '/updateLocation',
+  itineraryController.updateActivity,
+  (req, res) => {
+    res.sendStatus(200);
+  },
+);
 
 router.delete('/deleteLocation/:user_id/:locationName', itineraryController.deleteLocation, (req, res) => {
   //delete middleware functionality

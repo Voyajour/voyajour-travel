@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsX } from 'react-icons/bs';
 // this is a good component to start with while trying to understand how
 // state is flowing in this application
 const SidebarCard = (props) => {
@@ -8,6 +9,8 @@ const SidebarCard = (props) => {
     country,
     getActivities,
     activeLocationId,
+    userId,
+    deleteLocationCard,
   } = props;
   return (
     <button
@@ -19,6 +22,10 @@ const SidebarCard = (props) => {
         backgroundColor: locationid === activeLocationId ? 'blue' : 'white',
       }}
     >
+      <BsX
+        className='delete-icon-location'
+        onClick={() => deleteLocationCard(locationid, userId)}
+      />
       <label>Location: {location}</label>
       <br />
       <label>Country: {country}</label>

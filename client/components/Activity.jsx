@@ -1,13 +1,15 @@
 import React from 'react';
+import { BsX } from 'react-icons/bs';
 
 const Activity = ({ description, notes, address, link }) => (
-  <div id="Activity">
+  <div id='Activity'>
+    <BsX className='delete-icon' />
     Description: {description}
-    <br/>
+    <br />
     Notes: {notes}
-    <br/>
+    <br />
     Address: {address}
-    <br/>
+    <br />
     Link: {link}
   </div>
 );

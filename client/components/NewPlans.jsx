@@ -3,13 +3,19 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 const NewPlans = (props) => {
-  const { newLocationInput, country, location, storeNewLocation } = props;
+  const {
+    newLocationInput,
+    country,
+    location,
+    userId,
+    storeNewLocation,
+  } = props;
   return (
     <div id='new-plans-container'>
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          storeNewLocation({ location, country });
+          storeNewLocation({ location, country }, userId);
         }}
         className='itinerary-form'
       >

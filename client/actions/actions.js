@@ -55,6 +55,10 @@ const addActivity = (newActivity) => ({
   payload: newActivity,
 });
 
+const deleteLocationCard = (input) => ({
+  type: types.DELETE_LOCATION_CARD,
+  payload: input,
+});
 // this action checks username and password with sql database before dispatching action to reducers
 // use redux thunk in order to make an asyncronous fetch
 // Below is the same as writing const validateLogin = (u, p ) => {
@@ -63,32 +67,45 @@ const addActivity = (newActivity) => ({
 const validateLogin = (username, password) => (dispatch) => {
   axios
     .post('/api/user-validation', { username, password })
-    .then((response) =>
+    .then((response) => {
+      dispatch({ type: types.POPULATE_ACTIVITIES, payload: response.data });
       dispatch({
         type: types.VALID_LOGIN,
         payload: response.data,
-      })
-    )
-    .catch((err) => console.log('Error in SUBMIT_LOGIN Reducer', err));
+      });
+    })
+    .catch((err) => console.log('Error in validate login thunk', err));
 };
 
-const storeNewLocation = (newLocationObj) => (dispatch) => {
+// send new location to db to be saved, pass return value (which will be location obj with userId added) to addNewLocation reducer func
+const storeNewLocation = (newLocationObj, userId) => (dispatch) => {
   axios
-    .post('/newLocation', newLocationObj)
+    .post(`/itinerary/newLocation/${userId}`, newLocationObj)
     .then((res) => dispatch(addNewLocation(res.data)))
-    .catch((err) =>
-      console.log('error inside of NEW_PLANS travel reducer', err)
-    );
+    .catch((err) => console.log('error inside of storeNewLocation thunk', err));
 };
 
-const storeNewActivity = (newActivityObj) => (dispatch) => {
+// send new activity to db to be saved, pass return value (which will be activity obj with userId added) to addActivity reducer func
+const storeNewActivity = (newActivityObj, userId) => (dispatch) => {
   axios
-    .post('/newActivity', newActivityObj)
+    .post(`/newActivity/${userId}`, newActivityObj)
     .then((res) => {
       dispatch(addActivity(res.data));
     })
     .catch((err) => {
-      console.log('error inside of ADD_ACTIVITIES reducer', err);
+      console.log('error inside of storeNewActivity thunk', err);
+    });
+};
+
+const removeLocationCard = (locationId, userId) => (dispatch) => {
+  axios
+    // this endpoint will need to be updated when we know the correct endpoint
+    .delete(`/${userId}/${locationId}`)
+    .then(() => {
+      dispatch(deleteLocationCard(locationId));
+    })
+    .catch((err) => {
+      console.log('error inside of removeLocationCard thunk', err);
     });
 };
 
@@ -106,4 +123,5 @@ export {
   addActivity,
   storeNewLocation,
   storeNewActivity,
+  removeLocationCard,
 };
