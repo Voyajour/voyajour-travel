@@ -12,6 +12,8 @@ const mapDispatchToProps = (dispatch) => ({
   newLocationInput: (e) => dispatch(actions.newLocationInput(e)),
   storeNewLocation: (e, userId) =>
     dispatch(actions.storeNewLocation(e, userId)),
+  deleteLocationCard: (locationId, userId) =>
+    dispatch(actions.deleteLocationCard(locationId, userId)),
 });
 
 const mapStateToProps = (state) => ({
@@ -33,6 +35,7 @@ const SidebarContainer = (props) => {
     trips,
     activeLocationId,
     storeNewLocation,
+    deleteLocationCard,
   } = props;
 
   return (
@@ -55,6 +58,8 @@ const SidebarContainer = (props) => {
           country={trip.country}
           location={trip.location}
           activeLocationId={activeLocationId}
+          deleteLocationCard={deleteLocationCard}
+          userId={userId}
         />
       ))}
     </div>
