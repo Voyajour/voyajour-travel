@@ -118,6 +118,7 @@ const travelReducer = (state = initialState, action) => {
       };
     }
 
+    // adds activity card to activities array after being being saved to DB in storeNewActivity thunk in actions.js
     case types.ADD_ACTIVITIES: {
       const newActivities = state.activities.slice();
       const newActivityStore = state.activityStore.slice();
@@ -130,6 +131,26 @@ const travelReducer = (state = initialState, action) => {
       };
     }
 
+    // removes location card from locations array after being being removed from DB in removeLocationCard thunk in actions.js
+    case types.DELETE_ACTIVITY_CARD: {
+      console.log(
+        `inside delete_activity_card travelreducer: ${action.payload}`
+      );
+      const activityId = action.payload;
+      const updatedActivities = state.activityStore.filter(
+        (activity) => activity._id !== activityId
+      );
+      const updatedActivityStore = state.activityStore.filter(
+        (activity) => activity._id !== activityId
+      );
+      return {
+        ...state,
+        activities: updatedActivities,
+        activityStore: updatedActivityStore,
+      };
+    }
+
+    // removes location card from locations array after being being removed from DB in removeLocationCard thunk in actions.js
     case types.DELETE_LOCATION_CARD: {
       const locationId = action.payload;
       const updatedTrips = state.trips.filter(
