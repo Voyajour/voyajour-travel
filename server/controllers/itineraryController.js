@@ -5,14 +5,14 @@ const itineraryController = {};
 itineraryController.newLocation = (req, res, next) => {
   const { location, country } = req.body;
 
-  const values = [location, country];
+  const values = [location, country, req.params.user_id];
   const QUERY =
-    'INSERT INTO locations (name, country) VALUES ($1, $2) RETURNING *;';
+    'INSERT INTO locations (name, country, user_id) VALUES ($1, $2, $3) RETURNING *;';
   db.query(QUERY, values)
     .then((newLocation) => {
       res.locals.success = true;
-      const { _id, name, country } = newLocation.rows[0];
-      const resObj = { location: name, country, id: _id };
+      const { _id, name, country, user_id } = newLocation.rows[0];
+      const resObj = { location: name, country, id: _id, user_id };
       res.locals.newLocation = resObj;
       return next();
     })
@@ -23,16 +23,23 @@ itineraryController.newLocation = (req, res, next) => {
     });
 };
 
-
 itineraryController.updateActivity = (req, res, next) => {
   //deconstruct req.body.
-  const {activity_id, description, notes, link, address, completed} = req.body;
+  const {
+    activity_id,
+    description,
+    notes,
+    link,
+    address,
+    completed,
+  } = req.body;
 
   //values to be used in the query.
   const values = [activity_id, description, notes, link, address, completed];
 
   //activities table columns: _id, location_id, user_id, link, notes, address, completed, description
-  const QUERY= 'UPDATE activities SET description=(description), notes=(notes), link=(link), address=(address), completed=(completed) WHERE _id=(activity_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;';
+  const QUERY =
+    'UPDATE activities SET description=(description), notes=(notes), link=(link), address=(address), completed=(completed) WHERE _id=(activity_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;';
 
   db.query(queryStr, values)
     .then((updatedActivity) => {
@@ -48,6 +55,5 @@ itineraryController.updateActivity = (req, res, next) => {
       return next();
     });
 };
-
 
 module.exports = itineraryController;
