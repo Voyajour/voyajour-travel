@@ -19,6 +19,10 @@ const initialState = {
     loginAttempts: 0,
     enterKeyPressed: false,
   },
+  activeUser: {
+    username: '',
+    userId: 0,
+  },
   newPlans: {
     newLocation: '',
     country: '',
@@ -96,7 +100,7 @@ const formReducer = (state = initialState, action) => {
     }
 
     case types.VALID_LOGIN: {
-      const validated = action.payload;
+      const { validated, username, user_id } = action.payload;
       let { loginAttempts } = state.login;
       loginAttempts += 1;
       return {
@@ -105,6 +109,10 @@ const formReducer = (state = initialState, action) => {
           ...state.login,
           validated,
           loginAttempts,
+        },
+        activeUser: {
+          username,
+          userId: user_id,
         },
       };
     }
@@ -140,6 +148,14 @@ const formReducer = (state = initialState, action) => {
           ...state.newActivity,
           ...action.payload,
         },
+      };
+    }
+
+    case types.DELETE_LOCATION_CARD: {
+      const { locationId, user_id } = action.payload;
+
+      return {
+        ...state,
       };
     }
 
