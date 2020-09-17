@@ -22,6 +22,7 @@ const mapStateToProps = (state) => ({
   completed: state.form.newActivity.completed,
   userId: state.form.activeUser.userId,
   activities: state.trips.activities,
+  activeLocationId: state.trips.activeLocationId,
 });
 
 const ActivitiesContainer = (props) => {
@@ -40,6 +41,7 @@ const ActivitiesContainer = (props) => {
     handleFormSubmit,
     addToActivitiesArray,
     activities,
+    activeLocationId,
   } = props;
 
   return (
@@ -55,6 +57,7 @@ const ActivitiesContainer = (props) => {
         handleFormInput={handleFormInput}
         handleFormSubmit={handleFormSubmit}
         addActivity={addToActivitiesArray}
+        activeLocationId={activeLocationId}
       />
       <h1>Activities: </h1>
       <div id='all-activities'>
