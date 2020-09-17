@@ -69,6 +69,7 @@ const ActivitiesContainer = (props) => {
             notes={el.notes}
             address={el.address}
             link={el.link}
+            locationId={el.location_id}
           />
         ))}
       </div>
