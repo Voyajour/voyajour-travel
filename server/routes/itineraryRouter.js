@@ -54,6 +54,16 @@ router.put(
   },
 );
 
+
+
+router.delete('/deleteActivity/:activityId', itineraryController.deleteActivity, (req, res) => {
+  if(res.locals.success) {
+    res.status(200).send("successfully deleted Activity.");
+  } else {
+    res.status(200).send("Could not delete location. Please contact administrator.");
+  }
+});
+
 //router update location
 router.put(
   '/updateLocation',
@@ -62,5 +72,15 @@ router.put(
     res.sendStatus(200);
   },
 );
+
+
+
+router.delete('/deleteLocation/:user_id/:locationId', itineraryController.deleteLocation, (req, res) => {
+  if(res.locals.success) {
+    res.status(200).send("successfully deleted location.");
+  } else {
+    res.status(200).send("Could not delete location. Please contact administrator.");
+  }
+});
 
 module.exports = router;
