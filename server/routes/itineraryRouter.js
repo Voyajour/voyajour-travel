@@ -36,11 +36,13 @@ router.post(
     }
   },
 );
+
+
 //router update update activity
 //activities table columns: _id, location_id, user_id, link, notes, address, completed, description
 //id is in params
 router.put(
-  '/updateActivity',
+  '/updateActivity/:user_id/:activityId',
   itineraryController.updateActivity,
   (req, res) => {
     //if res.locals.success is true then send the updatedActivity object back tot he client
