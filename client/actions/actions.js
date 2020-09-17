@@ -46,7 +46,7 @@ const activityFormInput = (formInput) => ({
 });
 
 const activityFormSubmit = (formInput) => ({
-  type: types.SUBMIT_ACTIVITY_FORM,
+  type: types.ACTIVITY_FORM_SUBMIT,
   payload: formInput,
 });
 
@@ -88,7 +88,7 @@ const storeNewLocation = (newLocationObj, userId) => (dispatch) => {
 // send new activity to db to be saved, pass return value (which will be activity obj with userId added) to addActivity reducer func
 const storeNewActivity = (newActivityObj, userId) => (dispatch) => {
   axios
-    .post(`/newActivity/${userId}`, newActivityObj)
+    .post(`itinerary/newActivity/${userId}`, newActivityObj)
     .then((res) => {
       dispatch(addActivity(res.data));
     })
@@ -97,10 +97,10 @@ const storeNewActivity = (newActivityObj, userId) => (dispatch) => {
     });
 };
 
-const removeLocationCard = (locationId, userId) => (dispatch) => {
+const removeLocationCard = (locationId) => (dispatch) => {
   axios
     // this endpoint will need to be updated when we know the correct endpoint
-    .delete(`/${userId}/${locationId}`)
+    .delete(`itinerary/deleteLocation/${locationId}`)
     .then(() => {
       dispatch(deleteLocationCard(locationId));
     })
@@ -124,4 +124,5 @@ export {
   storeNewLocation,
   storeNewActivity,
   removeLocationCard,
+  deleteLocationCard,
 };
