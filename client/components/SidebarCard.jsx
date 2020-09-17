@@ -10,22 +10,23 @@ const SidebarCard = (props) => {
     getActivities,
     activeLocationId,
     userId,
-    deleteLocationCard,
+    removeLocationCard,
   } = props;
   return (
     <button
       type='button'
-      locationid={locationid}
       onClick={() => getActivities(locationid)}
       className='side-bar-card'
       style={{
         backgroundColor: locationid === activeLocationId ? 'blue' : 'white',
       }}
     >
-      <BsX
+      <div
         className='delete-icon-location'
-        onClick={() => deleteLocationCard(locationid, userId)}
-      />
+        onClick={() => removeLocationCard(locationid, userId)}
+      >
+        <BsX />
+      </div>
       <label>Location: {location}</label>
       <br />
       <label>Country: {country}</label>
