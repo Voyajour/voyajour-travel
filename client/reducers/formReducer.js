@@ -140,22 +140,14 @@ const formReducer = (state = initialState, action) => {
       };
     }
 
-    case types.SUBMIT_ACTIVITY_FORM: {
-      console.log(action.payload);
+    case types.ACTIVITY_FORM_SUBMIT: {
+      console.log(`submit activity form payload: ${action.payload}`);
       return {
         ...state,
         newActivity: {
           ...state.newActivity,
           ...action.payload,
         },
-      };
-    }
-
-    case types.DELETE_LOCATION_CARD: {
-      const { locationId, user_id } = action.payload;
-
-      return {
-        ...state,
       };
     }
 
