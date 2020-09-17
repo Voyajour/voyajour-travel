@@ -55,15 +55,22 @@ const addActivity = (newActivity) => ({
   payload: newActivity,
 });
 
+const deleteActivityCard = (activityId) => ({
+  type: types.DELETE_ACTIVITY_CARD,
+  payload: activityId,
+});
+
 const deleteLocationCard = (input) => ({
   type: types.DELETE_LOCATION_CARD,
   payload: input,
 });
+
 // this action checks username and password with sql database before dispatching action to reducers
 // use redux thunk in order to make an asyncronous fetch
 // Below is the same as writing const validateLogin = (u, p ) => {
 // return function(dispatch) { ... }
 // }
+
 const validateLogin = (username, password) => (dispatch) => {
   axios
     .post('/api/user-validation', { username, password })
@@ -85,7 +92,7 @@ const storeNewLocation = (newLocationObj, userId) => (dispatch) => {
     .catch((err) => console.log('error inside of storeNewLocation thunk', err));
 };
 
-// send new activity to db to be saved, pass return value (which will be activity obj with userId added) to addActivity reducer func
+// send new activity to db to be saved, pass return value (which will be activity obj with userId added) to ADD_ACTIVITIES in travelReducer func
 const storeNewActivity = (newActivityObj, userId) => (dispatch) => {
   axios
     .post(`itinerary/newActivity/${userId}`, newActivityObj)
@@ -97,6 +104,21 @@ const storeNewActivity = (newActivityObj, userId) => (dispatch) => {
     });
 };
 
+// send location card to db to be saved, pass return value (which will be locationId) to DELETE_LOCATION_CARD in travelReducer func
+const removeActivityCard = (activityId) => (dispatch) => {
+  axios
+    // this endpoint will need to be updated when we know the correct endpoint
+    .delete(`itinerary/deleteActivity/${activityId}`)
+    .then(() => {
+      console.log(`about to dispatch ${activityId}`);
+      dispatch(deleteActivityCard(activityId));
+    })
+    .catch((err) => {
+      console.log('error inside of removeActivityCard thunk', err);
+    });
+};
+
+// send location card to db to be saved, pass return value (which will be locationId) to DELETE_LOCATION_CARD in travelReducer func
 const removeLocationCard = (locationId, userId) => (dispatch) => {
   console.log(`locationID: ${locationId}, userId:${userId}`);
   axios
@@ -122,6 +144,8 @@ export {
   activityFormInput,
   activityFormSubmit,
   addActivity,
+  removeActivityCard,
+  deleteActivityCard,
   storeNewLocation,
   storeNewActivity,
   removeLocationCard,
