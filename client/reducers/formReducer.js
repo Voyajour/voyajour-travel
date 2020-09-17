@@ -151,6 +151,14 @@ const formReducer = (state = initialState, action) => {
       };
     }
 
+    case types.DELETE_LOCATION_CARD: {
+      const { locationId, user_id } = action.payload;
+
+      return {
+        ...state,
+      };
+    }
+
     default:
       return state;
   }
