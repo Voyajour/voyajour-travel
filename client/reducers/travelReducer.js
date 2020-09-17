@@ -119,10 +119,8 @@ const travelReducer = (state = initialState, action) => {
     }
 
     case types.ADD_ACTIVITIES: {
-      console.log(Array.isArray(state.activities));
-      console.log(state.activities);
-      const newActivities = Array.from(state.activities);
-      const newActivityStore = Array.from(state.newActivityStore);
+      const newActivities = state.activities.slice();
+      const newActivityStore = state.activityStore.slice();
       newActivities.push(action.payload);
       newActivityStore.push(action.payload);
       return {
