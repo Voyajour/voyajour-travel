@@ -97,10 +97,11 @@ const storeNewActivity = (newActivityObj, userId) => (dispatch) => {
     });
 };
 
-const removeLocationCard = (locationId) => (dispatch) => {
+const removeLocationCard = (locationId, userId) => (dispatch) => {
+  console.log(`locationID: ${locationId}, userId:${userId}`);
   axios
     // this endpoint will need to be updated when we know the correct endpoint
-    .delete(`itinerary/deleteLocation/${locationId}`)
+    .delete(`itinerary/deleteLocation/${userId}/${locationId}`, { userId })
     .then(() => {
       dispatch(deleteLocationCard(locationId));
     })
