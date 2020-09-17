@@ -36,9 +36,7 @@ itineraryController.newLocation = (req, res, next) => {
   db.query(QUERY, values)
     .then((newLocation) => {
       res.locals.success = true;
-      const { _id, name, country, user_id } = newLocation.rows[0];
-      const resObj = { location: name, country, id: _id, user_id };
-      res.locals.newLocation = resObj;
+      res.locals.newLocation = newLocation.rows[0];
       return next();
     })
     .catch((err) => {
