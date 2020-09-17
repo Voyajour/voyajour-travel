@@ -6,7 +6,7 @@ import * as types from '../constants/actionTypes';
 
 // note, because of the way we set up index.js, this state is accesssed w/ state.trips;
 const initialState = {
-  activeLocationId: 1,
+  activeLocationId: 0,
   count: 0,
   // trips contains objects with keys: id(unique to location), location(str), country(str)
   trips: [
@@ -133,7 +133,7 @@ const travelReducer = (state = initialState, action) => {
     case types.DELETE_LOCATION_CARD: {
       const locationId = action.payload;
       const updatedTrips = state.trips.filter(
-        (trip) => trip.locationId !== locationId
+        (trip) => trip._id !== locationId
       );
       return {
         ...state,
