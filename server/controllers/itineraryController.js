@@ -82,16 +82,45 @@ itineraryController.updateActivity = (req, res, next) => {
     });
 };
 
+itineraryController.deleteActivity = (req, res, next) => {
+  const QUERY = 'DELETE FROM activities WHERE _id=$1;';
+  const value = [parseInt(req.params.activityId)];
+
+  db.query(QUERY, value)
+    .then(() => {
+      res.locals.success = true;
+      return next();
+    })
+    .catch((err) => {
+      res.locals.success = false;
+      console.log(err);
+      return next();
+    });
+}
+
 
 itineraryController.deleteLocation = (req, res, next) => {
   //db query to delete entire location based on user_id
-  const {user_id, locationName} = req.params;
+  const {user_id, locationId} = req.params;
 
-  const values = [user_id, locationName];
+  const values = [parseInt(user_id), parseInt(locationId)];
 
-  const QUERY = 'DELETE FROM locations WHERE user_id='
+  console.log(values);
 
+  const QUERY = 'DELETE FROM locations WHERE user_id=$1 AND _id=$2;';
 
+  db.query(QUERY, values)
+    .then(() => {
+      res.locals.success = true;
+      return next();
+    })
+    .catch(err => {
+      res.locals.success = false;
+      return next();
+    });
 }
+
+
+
 
 module.exports = itineraryController;
