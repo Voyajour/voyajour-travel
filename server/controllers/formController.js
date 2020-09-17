@@ -26,7 +26,6 @@ formController.findUser = (req, res, next) => {
   });
 };
 
-
 // decrypts password from SQL database and compares it with inputted password from login
 formController.checkPassword = (req, res, next) => {
   const { password, user } = res.locals;
@@ -37,8 +36,9 @@ formController.checkPassword = (req, res, next) => {
   // save the hashed password from the database in a variable
   const dBHashedPassword = user[0].password;
   // compare plaintext password with decrypted password
-  bcrypt.compare(password, dBHashedPassword)
-  // result is a boolean
+  bcrypt
+    .compare(password, dBHashedPassword)
+    // result is a boolean
     .then((result) => {
       res.locals.validated = result;
       return next();
@@ -50,17 +50,13 @@ formController.getData = (req, res, next) => {
   //res.locals.username contains username
   //res.locals.user_id contains user id
 
-  const queryActivities =  `SELECT * FROM activities WHERE user_id=${res.locals.user_id}`;
+  const queryActivities = `SELECT * FROM activities WHERE user_id=${res.locals.user_id}`;
   const queryLocations = `SELECT * FROM locations WHERE user_id=${res.locals.user_id}`;
-
-  console.log('Inside of getData:', res.locals.user_id);
-  console.log(typeof res.locals.user_id);
 
   db.query(queryActivities)
     .then((activityData) => {
       res.locals.activities = activityData.rows;
       console.log('First query activities: ', res.locals.activities);
-      
     })
     .then(() => {
       db.query(queryLocations)
@@ -68,26 +64,24 @@ formController.getData = (req, res, next) => {
           console.log('inside 2nd query ', locationData);
           res.locals.locations = locationData.rows;
 
-          //res.locals.response 
+          //res.locals.response
           res.locals.getResponse = {
             username: res.locals.username,
             user_id: res.locals.user_id,
             validated: true,
             locations: res.locals.locations,
             activities: res.locals.activities,
-          }
+          };
 
           return next();
         })
         .catch((err) => {
           return next(err);
-        })
+        });
     })
     .catch((err) => {
       return next(err);
-    })
-  
-
-}
+    });
+};
 
 module.exports = formController;
