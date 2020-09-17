@@ -15,6 +15,7 @@ const AddActivityModal = ({
   handleFormSubmit,
   addActivity,
   userId,
+  activeLocationId,
 }) => {
   // Note, React Hook used below
   const [inputValues, setInputValues] = useState([]);
@@ -29,7 +30,18 @@ const AddActivityModal = ({
           onSubmit={(e) => {
             e.preventDefault();
             handleFormSubmit({ description, notes, address, link });
-            addActivity({ description, notes, address, link }, userId);
+            addActivity(
+              {
+                description,
+                notes,
+                address,
+                link,
+                completed: false,
+                locationId: activeLocationId,
+                userId,
+              },
+              userId
+            );
           }}
         >
           <Form.Group controlId='activityDescription'>
