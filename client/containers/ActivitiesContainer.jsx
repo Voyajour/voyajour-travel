@@ -12,6 +12,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actions.activityFormSubmit(newState)),
   addToActivitiesArray: (activity, userId) =>
     dispatch(actions.storeNewActivity(activity, userId)),
+  removeActivityCard: (activityId, userId) =>
+    dispatch(actions.removeActivityCard(activityId, userId)),
 });
 
 const mapStateToProps = (state) => ({
@@ -40,6 +42,7 @@ const ActivitiesContainer = (props) => {
     handleFormInput,
     handleFormSubmit,
     addToActivitiesArray,
+    removeActivityCard,
     activities,
     activeLocationId,
   } = props;
@@ -65,10 +68,14 @@ const ActivitiesContainer = (props) => {
         {activities.map((el, i) => (
           <Activity
             key={`activity${i}`}
+            activityId={el._id}
             description={el.description}
             notes={el.notes}
             address={el.address}
             link={el.link}
+            locationId={el.location_id}
+            userId={userId}
+            removeActivityCard={removeActivityCard}
           />
         ))}
       </div>
