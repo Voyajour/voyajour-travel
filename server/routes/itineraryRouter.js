@@ -25,6 +25,17 @@ router.post(
 //   res.status(200).json(res.locals);
 // });
 
+router.post(
+  '/newActivity/:user_id',
+  itineraryController.newActivity,
+  (req, res) => {
+    if (res.locals.success) {
+      res.status(200).json(res.locals.newActivity);
+    } else {
+      res.status(200).send('Sorry, activity could not be added');
+    }
+  },
+);
 //router update update activity
 //activities table columns: _id, location_id, user_id, link, notes, address, completed, description
 //id is in params
@@ -32,8 +43,8 @@ router.put(
   '/updateActivity',
   itineraryController.updateActivity,
   (req, res) => {
-    //if res.locals.sucess is true then send the updatedActivity object back tot he client
-    if (res.locals.sucess) {
+    //if res.locals.success is true then send the updatedActivity object back tot he client
+    if (res.locals.success) {
       res.status(200).json(res.locals.updatedActivity);
     } else {
       res

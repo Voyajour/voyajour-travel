@@ -1,6 +1,31 @@
 const db = require('../models/mainModel.js');
 
 const itineraryController = {};
+itineraryController.newActivity = (req, res, next) => {
+  const { locationId, link, notes, address, completed, description } = req.body;
+  const values = [
+    locationId,
+    req.params.user_id,
+    link,
+    notes,
+    address,
+    completed,
+    description,
+  ];
+  const QUERY =
+    'INSERT INTO activities (location_id, user_id, link, notes, address, completed, description) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;';
+  db.query(QUERY, values)
+    .then((newActivity) => {
+      res.locals.success = true;
+      res.locals.newActivity = newActivity.rows[0];
+      return next();
+    })
+    .catch((err) => {
+      console.log('query ', err.stack);
+      res.locals.success = false;
+      return next();
+    });
+};
 
 itineraryController.newLocation = (req, res, next) => {
   const { location, country } = req.body;
