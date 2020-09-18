@@ -71,7 +71,15 @@
   overflow-y: scroll;
 }
 
+.sidebar-pane::-webkit-scrollbar {
+  display: none;
+}
+
 .activity-pane {
   height: 75vh;
   overflow-y: scroll;
+}
+
+.activity-pane::-webkit-scrollbar {
+  display: none;
 }
