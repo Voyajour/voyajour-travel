@@ -65,19 +65,21 @@ const ActivitiesContainer = (props) => {
       <h1>Activities: </h1>
       <div id='all-activities'>
         <Button onClick={() => setShowModal(true)}>Add Activity</Button>
-        {activities.map((el, i) => (
-          <Activity
-            key={`activity${i}`}
-            activityId={el._id}
-            description={el.description}
-            notes={el.notes}
-            address={el.address}
-            link={el.link}
-            locationId={el.location_id}
-            userId={userId}
-            removeActivityCard={removeActivityCard}
-          />
-        ))}
+        <div className='activity-pane'>
+          {activities.map((el, i) => (
+            <Activity
+              key={`activity${i}`}
+              activityId={el._id}
+              description={el.description}
+              notes={el.notes}
+              address={el.address}
+              link={el.link}
+              locationId={el.location_id}
+              userId={userId}
+              removeActivityCard={removeActivityCard}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

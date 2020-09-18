@@ -50,18 +50,20 @@ const SidebarContainer = (props) => {
         storeNewLocation={storeNewLocation}
       />
       {/* this function iterates over an array in state and renders Sidebar Card components */}
-      {trips.map((trip, i) => (
-        <SidebarCard
-          key={`locationId${i}`}
-          locationid={trip._id}
-          getActivities={getActivities}
-          country={trip.country}
-          location={trip.name}
-          activeLocationId={activeLocationId}
-          removeLocationCard={removeLocationCard}
-          userId={userId}
-        />
-      ))}
+      <div className='sidebar-pane'>
+        {trips.map((trip, i) => (
+          <SidebarCard
+            key={`locationId${i}`}
+            locationid={trip._id}
+            getActivities={getActivities}
+            country={trip.country}
+            location={trip.name}
+            activeLocationId={activeLocationId}
+            removeLocationCard={removeLocationCard}
+            userId={userId}
+          />
+        ))}
+      </div>
     </div>
   );
 };

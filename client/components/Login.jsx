@@ -45,55 +45,57 @@ const Login = (props) => {
   if (loginAttempts > 0) return <Redirect to='/signup' />;
 
   return (
-    <Container>
-      <h1>Voyajour</h1>
+    <Container fluid className='login-display'>
+      <div className='login-container'>
+        <h1>Voyajour</h1>
 
-      <Form noValidate>
-        <Form.Group controlId='username'>
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Username'
-            required
-            onChange={loginInput}
-          />
-          <Form.Control.Feedback type='invalid'>
-            Incorrect Username
-          </Form.Control.Feedback>
-        </Form.Group>
+        <Form noValidate>
+          <Form.Group controlId='username'>
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Username'
+              required
+              onChange={loginInput}
+            />
+            <Form.Control.Feedback type='invalid'>
+              Incorrect Username
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Password'
-            required
-            onChange={loginInput}
-          />
-          <Form.Control.Feedback type='invalid'>
-            Incorrect Password
-          </Form.Control.Feedback>
-        </Form.Group>
+          <Form.Group controlId='password'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type='password'
+              placeholder='Password'
+              required
+              onChange={loginInput}
+            />
+            <Form.Control.Feedback type='invalid'>
+              Incorrect Password
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group controlId='loginCheckbox'>
-          <Form.Check type='checkbox' label='Remember me' />
-        </Form.Group>
+          <Form.Group controlId='loginCheckbox'>
+            <Form.Check type='checkbox' label='Remember me' />
+          </Form.Group>
 
-        <Button
-          className='mr-3'
-          variant='danger'
-          type='button'
-          onClick={() => validateLogin(username, password)}
-        >
-          Login
-        </Button>
-      </Form>
+          <Button
+            className='mr-3'
+            variant='primary'
+            type='button'
+            onClick={() => validateLogin(username, password)}
+          >
+            Login
+          </Button>
+        </Form>
 
-      <br />
-      <p className='text-center'>
-        New user?&nbsp;
-        <Link to='/signup'>Sign up here!</Link>
-      </p>
+        <br />
+        <p className='text-center'>
+          New user?&nbsp;
+          <Link to='/signup'>Sign up here!</Link>
+        </p>
+      </div>
     </Container>
   );
 };
