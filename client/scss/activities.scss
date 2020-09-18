@@ -14,17 +14,19 @@
 #Activity {
   text-align: start;
   margin: 3%;
-  border: solid 1px black;
+  border: solid 1px lighten($color: $base-color, $amount: 20);
   border-radius: 0.2rem;
   padding: 2%;
-  box-shadow: 0.2rem 0.2rem 0.2rem lighten($color: $base-color, $amount: 55);
+  box-shadow: 2px 2px 5px lighten($color: $base-color, $amount: 45);
   background-color: lighten($color: $base-color, $amount: 85);
   position: relative;
 }
 
 .delete-icon {
   position: absolute;
-  top: 1rem;
+  padding: 0;
+  height: auto;
+  top: 0rem;
   right: 1rem;
   font-size: 2rem;
 }
