@@ -7,14 +7,14 @@ import Signup from './components/Signup.jsx';
 import MainContainer from './containers/MainContainer.jsx';
 
 const App = () => (
-  <div>
+  <div className='main-container'>
     <Switch>
       {/* route to "/" has to be exact because otherwise /main and /sign up won't render  */}
-      <Route path="/" exact component={Login} />
+      <Route path='/' exact component={Login} />
       {/* please note: even though login component successfully checks credentials,
           MainContainer is not private or locked off to unauthorized users. */}
-      <Route path="/main" component={MainContainer} />
-      <Route path="/signup" component={Signup} />
+      <Route path='/main' component={MainContainer} />
+      <Route path='/signup' component={Signup} />
     </Switch>
   </div>
 );

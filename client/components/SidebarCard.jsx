@@ -18,7 +18,8 @@ const SidebarCard = (props) => {
       onClick={() => getActivities(locationid)}
       className='side-bar-card'
       style={{
-        backgroundColor: locationid === activeLocationId ? 'blue' : 'white',
+        backgroundColor: locationid === activeLocationId ? '#007bff' : 'white',
+        color: locationid === activeLocationId ? 'white' : 'black',
       }}
     >
       <div

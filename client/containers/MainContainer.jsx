@@ -26,7 +26,7 @@ const MainContainer = (props) => {
   return (
     <div>
       <NavContainer />
-      <div className="body-container">
+      <div className='main-row'>
         <SidebarContainer />
         <ActivitiesContainer />
       </div>
